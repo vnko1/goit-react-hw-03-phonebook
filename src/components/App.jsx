@@ -13,8 +13,9 @@ export class App extends Component {
 
     this.setState(prevState => ({
       contacts: [...prevState.contacts, obj],
+      name: name.value,
+      number: number.value,
     }));
-    this.setState({ name: name.value, number: number.value });
 
     form.reset();
   };
