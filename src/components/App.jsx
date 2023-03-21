@@ -1,15 +1,28 @@
 import { Component } from 'react';
+import { nanoid } from 'nanoid';
 import { ContactForm, ContactList, Filter } from './phoneBook';
 
 export class App extends Component {
   state = { contacts: [], name: '', number: '', filter: '' };
 
-  onSubmitChangeState = ({ contact, name, number }) => {
+  onSubmitChangeState = e => {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const { name, number } = e.target.elements;
+    const obj = { name: name.value, number: number.value, id: nanoid() };
+
     this.setState(prevState => ({
-      contacts: [...prevState.contacts, contact],
+      contacts: [...prevState.contacts, obj],
     }));
-    this.setState({ name, number });
+    this.setState({ name: name.value, number: number.value });
+
+    form.reset();
   };
+
+  // onHandleChange(e) {
+  //   this.setState({  });
+  // }
+
   render() {
     return (
       <div
@@ -25,7 +38,7 @@ export class App extends Component {
           <h1>Phonebook</h1>
           <ContactForm onSubmitChangeState={this.onSubmitChangeState} />
           <h2>Contacts</h2>
-          <Filter />
+          <Filter onHandleChange={this.onHandleChange} />
           <ContactList contacts={this.state.contacts} />
         </section>
       </div>
