@@ -1,3 +1,3 @@
-export { ContactForm } from './ContactForm';
-export { ContactList } from './ContactList';
-export { Filter } from './Filter';
+export { ContactForm } from './contactForm/ContactForm';
+export { ContactList } from './contactList/ContactList';
+export { Filter } from './filter/Filter';

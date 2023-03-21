@@ -51,24 +51,18 @@ export class App extends Component {
 
   render() {
     return (
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          fontSize: 40,
-          color: '#010101',
-        }}
-      >
+      <div>
         <section>
-          <h1>Phonebook</h1>
-          <ContactForm onHandleSubmit={this.onHandleSubmit} />
-          <h2>Contacts</h2>
-          <Filter onHandleChange={this.onHandleChange} />
-          <ContactList
-            contacts={this.filterContacts()}
-            deleteContacts={this.deleteContacts}
-          />
+          <div className="container">
+            <h1>Phonebook</h1>
+            <ContactForm onHandleSubmit={this.onHandleSubmit} />
+            <h2>Contacts</h2>
+            <Filter onHandleChange={this.onHandleChange} />
+            <ContactList
+              contacts={this.filterContacts()}
+              deleteContacts={this.deleteContacts}
+            />
+          </div>
         </section>
       </div>
     );
