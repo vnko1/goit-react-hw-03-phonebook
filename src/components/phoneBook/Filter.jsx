@@ -1,5 +1,4 @@
-import { Component } from 'react';
-
+import PropTypes from 'prop-types';
 export const Filter = ({ onHandleChange }) => {
   return (
     <>
@@ -8,3 +7,5 @@ export const Filter = ({ onHandleChange }) => {
     </>
   );
 };
+
+Filter.propTypes = { onHandleChange: PropTypes.func.isRequired };
