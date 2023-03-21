@@ -3,26 +3,51 @@ import { nanoid } from 'nanoid';
 import { ContactForm, ContactList, Filter } from './phoneBook';
 
 export class App extends Component {
-  state = { contacts: [], name: '', number: '', filter: '' };
+  state = { contacts: [], filter: '' };
 
-  onSubmitChangeState = e => {
+  onHandleSubmit = e => {
     e.preventDefault();
     const form = e.currentTarget;
     const { name, number } = e.target.elements;
-    const obj = { name: name.value, number: number.value, id: nanoid() };
 
+    const obj = {
+      name: name.value.trim(),
+      number: number.value.trim(),
+      id: nanoid(),
+    };
+    const isIncluded = this.state.contacts.some(
+      contact => contact.name.toLowerCase() === name.value.toLowerCase().trim()
+    );
+    if (isIncluded) {
+      alert(`${name.value.trim()} is already in contacts`);
+      form.reset();
+      return;
+    }
     this.setState(prevState => ({
       contacts: [...prevState.contacts, obj],
-      name: name.value,
-      number: number.value,
     }));
 
     form.reset();
   };
 
-  // onHandleChange(e) {
-  //   this.setState({  });
-  // }
+  onHandleChange = e => {
+    const { value } = e.currentTarget;
+    this.setState({ filter: value });
+  };
+
+  filterContacts = () => {
+    const { filter, contacts } = this.state;
+    const normalizedFilter = filter.toLowerCase();
+    return contacts.filter(contact =>
+      contact.name.toLowerCase().includes(normalizedFilter)
+    );
+  };
+
+  deleteContacts = id => {
+    this.setState(prevState => ({
+      contacts: prevState.contacts.filter(contact => contact.id !== id),
+    }));
+  };
 
   render() {
     return (
@@ -37,10 +62,13 @@ export class App extends Component {
       >
         <section>
           <h1>Phonebook</h1>
-          <ContactForm onSubmitChangeState={this.onSubmitChangeState} />
+          <ContactForm onHandleSubmit={this.onHandleSubmit} />
           <h2>Contacts</h2>
           <Filter onHandleChange={this.onHandleChange} />
-          <ContactList contacts={this.state.contacts} />
+          <ContactList
+            contacts={this.filterContacts()}
+            deleteContacts={this.deleteContacts}
+          />
         </section>
       </div>
     );

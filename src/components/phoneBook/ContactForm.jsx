@@ -1,6 +1,6 @@
-const ContactForm = ({ onSubmitChangeState }) => {
+const ContactForm = ({ onHandleSubmit }) => {
   return (
-    <form onSubmit={onSubmitChangeState}>
+    <form onSubmit={onHandleSubmit}>
       <label>
         <p>Name</p>
         <input
