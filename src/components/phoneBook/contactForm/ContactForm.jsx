@@ -4,6 +4,11 @@ import { nanoid } from 'nanoid';
 import css from './ContactForm.module.css';
 
 class ContactForm extends Component {
+  static propTypes = {
+    onSubmitData: PropTypes.func.isRequired,
+    contacts: PropTypes.array.isRequired,
+  };
+
   state = { name: '', number: '' };
 
   onHandleSubmit = e => {
@@ -15,7 +20,9 @@ class ContactForm extends Component {
       id: nanoid(),
     };
 
-    const isIncluded = this.props.contacts.some(
+    const { onSubmitData, contacts } = this.props;
+
+    const isIncluded = contacts.some(
       contact => contact.name.toLowerCase() === name.value.toLowerCase().trim()
     );
 
@@ -25,7 +32,7 @@ class ContactForm extends Component {
       return;
     }
 
-    this.props.onSubmitData(obj);
+    onSubmitData(obj);
     this.reset();
   };
 
@@ -76,10 +83,5 @@ class ContactForm extends Component {
     );
   }
 }
-
-ContactForm.propTypes = {
-  onSubmitData: PropTypes.func.isRequired,
-  contacts: PropTypes.array.isRequired,
-};
 
 export { ContactForm };
