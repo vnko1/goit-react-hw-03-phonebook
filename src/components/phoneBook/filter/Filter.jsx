@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 
 import css from './Filter.module.css';
 
-const Filter = ({ onHandleChange, filter = '' }) => {
+const Filter = ({ onHandleChange, filter }) => {
   return (
     <label className={css.container}>
       <p>Find contacts by name</p>
