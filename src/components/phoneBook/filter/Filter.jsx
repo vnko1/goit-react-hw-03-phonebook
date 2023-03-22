@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { nanoid } from 'nanoid';
 import css from './Filter.module.css';
 
-export const Filter = ({ onHandleChange, filter = '' }) => {
+const Filter = ({ onHandleChange, filter = '' }) => {
   const id = nanoid();
 
   return (
@@ -19,6 +19,8 @@ export const Filter = ({ onHandleChange, filter = '' }) => {
     </label>
   );
 };
+
+export { Filter };
 
 Filter.propTypes = {
   onHandleChange: PropTypes.func.isRequired,

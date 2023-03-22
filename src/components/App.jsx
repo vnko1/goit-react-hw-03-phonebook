@@ -1,43 +1,18 @@
 import { Component } from 'react';
-import { nanoid } from 'nanoid';
 import { ContactForm, ContactList, Filter } from './phoneBook';
 
 export class App extends Component {
-  state = { contacts: [], filter: '', name: '', number: '' };
+  state = { contacts: [], filter: '' };
 
-  onHandleSubmit = e => {
-    e.preventDefault();
-    const { name, number } = e.target.elements;
-    const obj = {
-      name: name.value.trim(),
-      number: number.value.trim(),
-      id: nanoid(),
-    };
-
-    const isIncluded = this.state.contacts.some(
-      contact => contact.name.toLowerCase() === name.value.toLowerCase().trim()
-    );
-
-    if (isIncluded) {
-      alert(`${name.value.trim()} is already in contacts`);
-      this.reset();
-      return;
-    }
-
+  onSubmitData = obj => {
     this.setState(prevState => ({
       contacts: [...prevState.contacts, obj],
     }));
-
-    this.reset();
   };
 
   onHandleChange = e => {
     const { name: key, value } = e.currentTarget;
     this.setState({ [key]: value });
-  };
-
-  reset = () => {
-    this.setState({ name: '', number: '' });
   };
 
   filterContacts = () => {
@@ -61,10 +36,8 @@ export class App extends Component {
           <div className="container">
             <h1>Phonebook</h1>
             <ContactForm
-              onHandleSubmit={this.onHandleSubmit}
-              onHandleChange={this.onHandleChange}
-              name={this.state.name}
-              number={this.state.number}
+              onSubmitData={this.onSubmitData}
+              contacts={this.state.contacts}
             />
             <h2>Contacts</h2>
             <Filter
