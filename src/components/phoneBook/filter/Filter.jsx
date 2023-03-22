@@ -5,7 +5,7 @@ import css from './Filter.module.css';
 const Filter = ({ onHandleChange, filter }) => {
   return (
     <label className={css.container}>
-      <p>Find contacts by name</p>
+      <span>Find contacts by name</span>
       <input
         className={css.input}
         type="text"
