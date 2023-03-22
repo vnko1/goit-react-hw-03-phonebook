@@ -1,18 +1,26 @@
 import PropTypes from 'prop-types';
+import { nanoid } from 'nanoid';
 import css from './Filter.module.css';
 
-export const Filter = ({ onHandleChange }) => {
+export const Filter = ({ onHandleChange, filter = '' }) => {
+  const id = nanoid();
+
   return (
-    <div className={css.container}>
+    <label className={css.container} htmlFor={id}>
       <p>Find contacts by name</p>
       <input
         className={css.input}
         type="text"
-        name="query"
+        name="filter"
         onChange={onHandleChange}
+        value={filter}
+        id={id}
       />
-    </div>
+    </label>
   );
 };
 
-Filter.propTypes = { onHandleChange: PropTypes.func.isRequired };
+Filter.propTypes = {
+  onHandleChange: PropTypes.func.isRequired,
+  filter: PropTypes.string.isRequired,
+};

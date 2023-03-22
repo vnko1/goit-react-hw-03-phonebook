@@ -3,36 +3,41 @@ import { nanoid } from 'nanoid';
 import { ContactForm, ContactList, Filter } from './phoneBook';
 
 export class App extends Component {
-  state = { contacts: [], filter: '' };
+  state = { contacts: [], filter: '', name: '', number: '' };
 
   onHandleSubmit = e => {
     e.preventDefault();
-    const form = e.currentTarget;
     const { name, number } = e.target.elements;
-
     const obj = {
       name: name.value.trim(),
       number: number.value.trim(),
       id: nanoid(),
     };
+
     const isIncluded = this.state.contacts.some(
       contact => contact.name.toLowerCase() === name.value.toLowerCase().trim()
     );
+
     if (isIncluded) {
       alert(`${name.value.trim()} is already in contacts`);
-      form.reset();
+      this.reset();
       return;
     }
+
     this.setState(prevState => ({
       contacts: [...prevState.contacts, obj],
     }));
 
-    form.reset();
+    this.reset();
   };
 
   onHandleChange = e => {
-    const { value } = e.currentTarget;
-    this.setState({ filter: value });
+    const { name: key, value } = e.currentTarget;
+    this.setState({ [key]: value });
+  };
+
+  reset = () => {
+    this.setState({ name: '', number: '' });
   };
 
   filterContacts = () => {
@@ -55,9 +60,17 @@ export class App extends Component {
         <section>
           <div className="container">
             <h1>Phonebook</h1>
-            <ContactForm onHandleSubmit={this.onHandleSubmit} />
+            <ContactForm
+              onHandleSubmit={this.onHandleSubmit}
+              onHandleChange={this.onHandleChange}
+              name={this.state.name}
+              number={this.state.number}
+            />
             <h2>Contacts</h2>
-            <Filter onHandleChange={this.onHandleChange} />
+            <Filter
+              onHandleChange={this.onHandleChange}
+              filter={this.state.filter}
+            />
             <ContactList
               contacts={this.filterContacts()}
               deleteContacts={this.deleteContacts}
