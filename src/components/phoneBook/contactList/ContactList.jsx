@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types';
-import { AiFillContacts } from 'react-icons/ai';
 import { Contact } from './Contact';
 import css from './ContactList.module.css';
 
