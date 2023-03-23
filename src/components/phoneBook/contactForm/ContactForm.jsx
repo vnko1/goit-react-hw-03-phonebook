@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import { Component } from 'react';
 import { nanoid } from 'nanoid';
 import css from './ContactForm.module.css';
-import { AiTwotoneProject } from 'react-icons/ai';
 
 class ContactForm extends Component {
   static propTypes = {
