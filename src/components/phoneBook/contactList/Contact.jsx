@@ -1,7 +1,14 @@
 import PropTypes from 'prop-types';
+import { AiFillContacts } from 'react-icons/ai';
+import css from './ContactList.module.css';
 
 export const Contact = ({ name, number }) => {
-  return <p>{`${name}: ${number}`}</p>;
+  return (
+    <div className={css.itemContainer}>
+      <AiFillContacts />
+      <p>{`${name}: ${number}`}</p>
+    </div>
+  );
 };
 
 Contact.propTypes = {

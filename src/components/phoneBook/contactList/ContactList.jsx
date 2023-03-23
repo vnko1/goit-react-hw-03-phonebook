@@ -10,10 +10,7 @@ const ContactList = ({ contacts, deleteContacts }) => {
         {contacts.map(({ id, name, number }) => {
           return (
             <li className={css.item} key={id}>
-              <div className={css.itemContainer}>
-                <AiFillContacts />
-                <Contact name={name} number={number} />
-              </div>
+              <Contact name={name} number={number} />
               <button
                 className={css.button}
                 type="button"
