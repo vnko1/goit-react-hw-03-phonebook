@@ -17,10 +17,18 @@ export class App extends Component {
 
   filterContacts = () => {
     const { filter, contacts } = this.state;
+    const reg = /[\s\d]/;
+
     const normalizedFilter = filter.toLowerCase();
-    return contacts.filter(contact =>
-      contact.name.toLowerCase().includes(normalizedFilter)
-    );
+    if (reg.test(filter)) {
+      return contacts.filter(contact =>
+        contact.number.toLowerCase().includes(normalizedFilter)
+      );
+    } else {
+      return contacts.filter(contact =>
+        contact.name.toLowerCase().includes(normalizedFilter)
+      );
+    }
   };
 
   deleteContacts = id => {
