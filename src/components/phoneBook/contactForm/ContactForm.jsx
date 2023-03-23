@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import { Component } from 'react';
 import { nanoid } from 'nanoid';
 import css from './ContactForm.module.css';
+import { AiTwotoneProject } from 'react-icons/ai';
 
 class ContactForm extends Component {
   static propTypes = {
@@ -75,7 +76,11 @@ class ContactForm extends Component {
               required
             />
           </label>
-          <button className={css.button} type="submit">
+          <button
+            className={css.button}
+            type="submit"
+            disabled={!this.state.name || !this.state.number}
+          >
             Add contact
           </button>
         </form>
