@@ -1,13 +1,24 @@
 import { Component } from 'react';
 import { ContactForm, ContactList, Filter } from './phoneBook';
+import { STORAGE_KEY } from './services/constants';
+import { load, save } from './services/localStorage';
 
 export class App extends Component {
   state = { contacts: [], filter: '' };
 
   onSubmitData = obj => {
-    this.setState(prevState => ({
-      contacts: [...prevState.contacts, obj],
-    }));
+    const currentStorage = load(STORAGE_KEY);
+
+    if (!currentStorage) {
+      save(STORAGE_KEY, [obj]);
+    } else {
+      currentStorage.push(obj);
+      save(STORAGE_KEY, currentStorage);
+    }
+
+    // this.setState(prevState => ({
+    //   contacts: [...prevState.contacts, obj],
+    // }));
   };
 
   onHandleChange = e => {
@@ -36,6 +47,10 @@ export class App extends Component {
       contacts: prevState.contacts.filter(contact => contact.id !== id),
     }));
   };
+
+  componentDidMount() {
+    this.setState({ contacts: load(STORAGE_KEY) || [] });
+  }
 
   render() {
     return (

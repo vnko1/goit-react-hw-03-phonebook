@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import { nanoid } from 'nanoid';
 import css from './ContactForm.module.css';
-import { submitSchema } from 'components/constants';
+import { submitSchema } from 'components/services/constants';
 
 const ContactForm = ({ contacts, onSubmitData }) => {
   const onSubmit = (values, action) => {

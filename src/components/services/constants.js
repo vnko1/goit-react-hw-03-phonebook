@@ -22,4 +22,5 @@ const submitSchema = Yup.object().shape({
     .required('Required'),
 });
 
-export { submitSchema };
+const STORAGE_KEY = 'contacts';
+export { submitSchema, STORAGE_KEY };
