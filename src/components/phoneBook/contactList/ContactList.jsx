@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types';
-import { AiFillContacts } from 'react-icons/ai';
 import { Contact } from './Contact';
 import css from './ContactList.module.css';
 
@@ -10,10 +9,7 @@ const ContactList = ({ contacts, deleteContacts }) => {
         {contacts.map(({ id, name, number }) => {
           return (
             <li className={css.item} key={id}>
-              <div className={css.itemContainer}>
-                <AiFillContacts />
-                <Contact name={name} number={number} />
-              </div>
+              <Contact name={name} number={number} />
               <button
                 className={css.button}
                 type="button"
