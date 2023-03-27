@@ -17,8 +17,8 @@ const ContactForm = ({ contacts, onSubmitData }) => {
     );
 
     if (isIncluded) {
-      alert(`${values.name.trim()} is already in contacts`);
       action.resetForm();
+      alert(`${values.name.trim()} is already in contacts`);
       return;
     }
 
