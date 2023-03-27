@@ -1,5 +1,4 @@
 .form {
-  /* width: 320px; */
   padding: 16px;
   margin-left: auto;
   margin-right: auto;
@@ -13,6 +12,7 @@
 }
 
 .label {
+  position: relative;
   width: 100%;
 }
 
@@ -29,6 +29,15 @@
   border: none;
 }
 
+.error {
+  display: block;
+  text-align: center;
+  padding: 4px 8px;
+  color: black;
+  background-color: red;
+  border-radius: 10px;
+}
+
 .button {
   margin-top: 8px;
   padding: 4px 8px;
@@ -36,6 +45,7 @@
   cursor: pointer;
   border: none;
 }
+
 .button:hover,
 .button:focus {
   background-color: grey;
