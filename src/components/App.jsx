@@ -6,6 +6,16 @@ import { load, save } from './services/localStorage';
 export class App extends Component {
   state = { contacts: [], filter: '' };
 
+  componentDidMount() {
+    this.setState({ contacts: load(STORAGE_KEY) || [] });
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.contacts !== prevState.contacts) {
+      save(STORAGE_KEY, this.state.contacts);
+    }
+  }
+
   onSubmitData = obj => {
     this.setState(prevState => ({
       contacts: [...prevState.contacts, obj],
@@ -62,15 +72,5 @@ export class App extends Component {
         </section>
       </div>
     );
-  }
-
-  componentDidMount() {
-    this.setState({ contacts: load(STORAGE_KEY) || [] });
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    if (this.state.contacts !== prevState.contacts) {
-      save(STORAGE_KEY, this.state.contacts);
-    }
   }
 }
